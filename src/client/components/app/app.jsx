@@ -1,12 +1,15 @@
 import React from "react";
 
 function App() {
-
-  return (
-    <div>
+    let a = 2;
+    if (a == 2) {
+        console.log(a,);
+    }
+    return (
+        <div>
       Hello world!
-    </div>
-  )
+        </div>
+    )
 }
 
 export default App;
