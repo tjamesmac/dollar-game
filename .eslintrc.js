@@ -58,6 +58,7 @@ module.exports = {
             "ignoreDeclarationSort": false,
             "ignoreMemberSort": false,
             "memberSyntaxSortOrder": ["none", "all", "multiple", "single"]
-        }]
+        }],
+        "react/prop-types": 0
     }
 }
