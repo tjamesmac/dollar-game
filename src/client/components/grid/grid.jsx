@@ -1,7 +1,7 @@
 import "./grid.scss";
+import { generateGridArr, generateNodeCoordinates } from "./grid.helpers.jsx";
 import Node from "../node/node.jsx";
 import React from "react";
-import { generateGridArr } from "./grid.helpers.jsx";
 
 function Grid(props) {
     // generate bridges = bridges > 1 && bridges < nodes.length - 1
@@ -9,11 +9,19 @@ function Grid(props) {
 
     const rowLength = [...Array(rowNumber).keys()];
     const columnsLength = [...Array(colNumber).keys()];
-    const nodes = [[1, 3], [2, 2], [4, 4]];
+    const nodeLength = [...Array(nodeNumber).keys()];
+    
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * Math.floor(max) + 1);
+    }
 
+    const nodes = [[getRandomInt(4),getRandomInt(4)], [2, 2], [4, 4]];
+    
     const gridArray = generateGridArr(rowLength, columnsLength); // returns array that represents grid
+    const nodeCordinates = generateNodeCoordinates(nodeLength, rowNumber, colNumber);
 
-    for (const node of nodes) {
+
+    for (const node of nodeCordinates) {
         for (const [index, item] of gridArray.entries()) {
             if (node[0] === index) {
                 for (const iter of item) {
