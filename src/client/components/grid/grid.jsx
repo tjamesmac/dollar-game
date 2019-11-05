@@ -1,4 +1,5 @@
 import "./grid.scss";
+import Node from "../node/node.jsx";
 import React from "react";
 
 function Grid(props) {
@@ -37,7 +38,7 @@ function Grid(props) {
         const rowMaker = item.map((row, rowIndex) => {
             if (row.active) {
                 return (
-                    <div className="row" key={rowIndex}>Active</div>
+                    <div className="row" key={rowIndex}><Node /></div>
                 )
             } else {
                 return (
