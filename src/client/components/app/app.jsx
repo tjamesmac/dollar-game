@@ -7,7 +7,7 @@ function App() {
     }
     return (
         <div>
-      Hello world!
+      Hello my name!
         </div>
     )
 }
