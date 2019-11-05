@@ -11,7 +11,7 @@ function App() {
         <div>
             Hello world!
             <Node name="fred" />
-            <Grid colNumber={10} rowNumber={10} />
+            <Grid colNumber={5} rowNumber={5} nodeNumber={5} />
         </div>
     )
 }
