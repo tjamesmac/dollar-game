@@ -33,7 +33,7 @@ module.exports = {
         "quotes": [2, "double", { "avoidEscape": true }],
         "block-spacing": [2, "always"],
         "brace-style": [2, "1tbs"],
-        "comma-dangle": ["error", "always"],
+        "comma-dangle": ["error", "always-multiline"],
         "eol-last": [2, "always"],
         "indent": [2, 4],
         "jsx-quotes": [2, "prefer-double"],
