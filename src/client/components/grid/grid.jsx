@@ -11,18 +11,16 @@ function Grid(props) {
     const columnsLength = [...Array(colNumber).keys()];
     const nodeLength = [...Array(nodeNumber).keys()];
     
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max) + 1);
-    }
+    // function getRandomInt(max) {
+    //     return Math.floor(Math.random() * Math.floor(max) + 1);
+    // }
 
-    const nodes = [[getRandomInt(4),getRandomInt(4)], [2, 2], [4, 4]];
+    // const nodes = [[getRandomInt(4),getRandomInt(4)], [2, 2], [4, 4]];
     
     const gridArray = generateGridArr(rowLength, columnsLength); // returns array that represents grid
     const nodeCordinates = generateNodeCoordinates(nodeLength, rowNumber, colNumber);
 
-    const uniquePairs = pairs => [...new Set(pairs.map(pair => JSON.stringify(pair)))].map(pair => JSON.parse(pair))
-
-    console.log(uniquePairs([[1,2], [1,1], [2,0], [1,2], [1,1]]));
+  
 
 
     for (const node of nodeCordinates) {
