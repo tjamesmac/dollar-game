@@ -20,6 +20,10 @@ function Grid(props) {
     const gridArray = generateGridArr(rowLength, columnsLength); // returns array that represents grid
     const nodeCordinates = generateNodeCoordinates(nodeLength, rowNumber, colNumber);
 
+    const uniquePairs = pairs => [...new Set(pairs.map(pair => JSON.stringify(pair)))].map(pair => JSON.parse(pair))
+
+    console.log(uniquePairs([[1,2], [1,1], [2,0], [1,2], [1,1]]));
+
 
     for (const node of nodeCordinates) {
         for (const [index, item] of gridArray.entries()) {
