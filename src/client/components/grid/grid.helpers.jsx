@@ -7,6 +7,7 @@ export function generateGridArr(rows, columns) {
             obj.index = item;
             obj.active = false;
             obj.bridges = null;
+            obj._id = null;
             rowArray.push(obj);
         }
         gridArray.push(rowArray);
@@ -66,7 +67,7 @@ export function generateBridges(nodeLength) {
     const randomBridgeLength = getRandomIntMinMax(1, maximumBridges);
     const randomArray = (length, max) => [...new Array(length)]
         .map(() => Math.floor(Math.random() * (max - 1)) + 1);
-    const randomValues = randomArray(randomBridgeLength, maximumBridges);
+    const randomValues = randomArray(randomBridgeLength, nodeLength);
     const filteredArray = [...new Set(randomValues)]
     return filteredArray;
 }
