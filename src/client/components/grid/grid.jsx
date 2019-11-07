@@ -13,15 +13,19 @@ function Grid(props) {
 
     const gridArray = generateGridArr(rowLength, columnsLength); // returns array that represents grid
     const nodeCordinates = generateNodeCoordinates(nodeLength, rowNumber, colNumber);
-    const bridges = generateBridges(nodeLength.length);
-    console.log(bridges);
 
+    
+
+    let count = 0;
     for (const node of nodeCordinates) {
         for (const [index, item] of gridArray.entries()) {
             if (node[0] === index) {
                 for (const iter of item) {
                     if (node[1] === iter.index) {
+                        console.log(count, "count");
                         iter.active = true
+                        iter._id = count;
+                        count += 1;
                     }
                 }
             }
@@ -31,7 +35,7 @@ function Grid(props) {
         const rowMaker = item.map((row, rowIndex) => {
             if (row.active) {
                 return (
-                    <div className="row" key={rowIndex}><Node bridges={generateBridges(nodeLength.length)} /></div>
+                    <div className="row" key={rowIndex}><Node id={row._id} bridges={generateBridges(nodeLength.length)} /></div>
                 )
             } else {
                 return (
