@@ -39,19 +39,7 @@ function Grid(props) {
     for (const bridge of bridgeArray) {
         totalBridges += bridge.length;
     }
-    React.useEffect( () => {
-        // const nodeValueArray = generateRandomArray(nodeNumber, totalBridges);
-        // setNodeValues(nodeValueArray)
-
-    }, [])
     const nodeValueArray = generateRandomArray(nodeNumber, totalBridges);
-    // setNodeValues(nodeValueArray)
-
-
-
-    
-    // console.log(nodeValueArray);
-    
     return (
         <div className="grid-container">
             <GridItem rowLength={rowLength} columnsLength={columnsLength} nodeLength={nodeLength} nodeValues={nodeValueArray} />
