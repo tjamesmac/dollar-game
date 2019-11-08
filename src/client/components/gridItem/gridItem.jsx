@@ -27,7 +27,7 @@ function gridItem(props) {
             if (row.active) {
                 console.log(row._id, "row id")
                 return (
-                    <div className="row" key={rowIndex}><Node id={row._id} bridges={generateBridges(nodeLength.length)} /></div>
+                    <div className="row" key={rowIndex}><Node id={row._id} /></div>
                 )
             } else {
                 return (
