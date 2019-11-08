@@ -14,7 +14,6 @@ function Line(props) {
     if (coordinates) {
         const svgStyle = {
             position: "absolute",
-            // "z-index": "-1",
             pointerEvents: "none",
         }
         const lineStyle = {
@@ -24,6 +23,8 @@ function Line(props) {
         let count = 0;
         for (let [index, coor] of bridges.entries()) {
             coor.map( (item, i) => {
+                console.log(index," this should be index");
+                console.log(coordinates," this should be index");
                 line = <svg height="500" width="500" style={svgStyle} key={count}>
                     <line x1={coordinates[index].x + 20} y1={coordinates[index].y} x2={coordinates[item].x + 20} y2={coordinates[item].y} style={lineStyle}/>
                 </svg>
