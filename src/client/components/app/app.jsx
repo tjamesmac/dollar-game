@@ -5,8 +5,10 @@ function App() {
 
     return (
         <div>
-            Hello world!
+
+            <span className="bold-text">The Dollar Game!</span>
             <Grid colNumber={10} rowNumber={10} nodeNumber={3} />
+
         </div>
     )
 }
