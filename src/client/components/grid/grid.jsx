@@ -2,6 +2,7 @@ import "./grid.scss";
 import GridItem from "../gridItem/gridItem.jsx";
 import Line from "../line/line.jsx";
 import React from "react";
+import { generateBridges } from "./grid.helpers.jsx";
 
 // collect all 'grid' related items and put into a new component
 // collect all line related items and put into a new component
@@ -15,10 +16,17 @@ function Grid(props) {
     const columnsLength = [...Array(colNumber).keys()];
     const nodeLength = [...Array(nodeNumber).keys()];
 
+    const bridgeArray = [];
+    for (const node of nodeLength) {
+        const bridge = generateBridges(nodeNumber);
+        bridgeArray.push(bridge);
+    }
+    console.log(bridgeArray, "here are the line bridges");
+
     return (
         <div className="grid-container">
             <GridItem rowLength={rowLength} columnsLength={columnsLength} nodeLength={nodeLength} />
-            <Line />
+            <Line bridges={bridgeArray} nodeNumber={nodeNumber}/>
         </div>
     )
 }
