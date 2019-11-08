@@ -3,7 +3,13 @@ import Node from "../node/node.jsx";
 import React from "react";
 
 function gridItem(props) {
-    const { rowLength, columnsLength, nodeLength } = props;
+    const { rowLength, columnsLength, nodeLength, nodeValues } = props;
+    const [generatedNodeValues, setNodeValues] = React.useState(null);
+    React.useEffect( () => {
+        // setNodeValues(nodeValues);
+    }, [])
+    // console.log(generatedNodeValues, "nodeValues");
+    
     const gridArray = generateGridArr(rowLength, columnsLength); // returns array that represents grid
 
     const nodeCordinates = generateNodeCoordinates(nodeLength, rowLength.length, columnsLength.length);
@@ -25,13 +31,13 @@ function gridItem(props) {
     const gridMaker = gridArray.map((item, index) => {
         const rowMaker = item.map((row, rowIndex) => {
             if (row.active) {
-                console.log(row._id, "row id")
+                console.log(row.count, "this is the counter value")
                 return (
-                    <div className="row" key={rowIndex}><Node id={row._id} /></div>
+                    <div className="row" key={rowIndex}><Node id={row._id} value={nodeValues[row._id]} /></div>
                 )
             } else {
                 return (
-                    <div className="row" key={rowIndex}>{rowIndex}</div>
+                    <div className="row" key={rowIndex}></div>
                 )
             }
         })
@@ -40,9 +46,9 @@ function gridItem(props) {
         )
     })
     return (
-        <div>
+        <React.Fragment>
             {gridMaker}
-        </div>
+        </React.Fragment>
     )
 }
 
