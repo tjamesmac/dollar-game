@@ -1,31 +1,43 @@
-import { generateBridges, getNodeCoordinates } from "../grid/grid.helpers.jsx";
 import React from "react";
-function Line() {
+import { getNodeCoordinates } from "../grid/grid.helpers.jsx";
+
+function Line(props) {
     const [coordinates, setCoordinates] = React.useState(null);
-    const coorArr = [];
+    const { bridges } = props;
 
     React.useEffect(() => {
-        const coor = getNodeCoordinates(setCoordinates);
-        const bridges = generateBridges(5);
-        console.log(bridges);
+        const coor = getNodeCoordinates();
+        setCoordinates(coor);
     }, [])
     let line;
+    let renderLines;
     if (coordinates) {
         const svgStyle = {
             position: "absolute",
+            // "z-index": "-1",
+            pointerEvents: "none",
         }
         const lineStyle = {
             stroke: "black",
         }
-        console.log(coordinates, "coordinates");
-        console.log(coordinates[0].x, coordinates[0].y, coordinates[1].x, coordinates[1].y )
-        line = <svg height="500" width="500" style={svgStyle}>
-            <line x1={coordinates[0].x} y1={coordinates[0].y} x2={coordinates[1].x} y2={coordinates[1].y} style={lineStyle}/>
-        </svg>
+        const lineArray = [];
+        let count = 0;
+        for (let [index, coor] of bridges.entries()) {
+            coor.map( (item, i) => {
+                line = <svg height="500" width="500" style={svgStyle} key={count}>
+                    <line x1={coordinates[index].x + 20} y1={coordinates[index].y} x2={coordinates[item].x + 20} y2={coordinates[item].y} style={lineStyle}/>
+                </svg>
+                lineArray.push(line);
+                count ++
+            })
+        }
+        renderLines = lineArray.map((item) => {
+            return item;
+        })
     }
     return (
         <React.Fragment>
-            {line}
+            {renderLines}
         </React.Fragment>
     )
 }
