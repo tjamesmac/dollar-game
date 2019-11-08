@@ -47,7 +47,7 @@ export function generateNodeCoordinates(nodeLength, rowNumber, colNumber) {
             return checkUniqueValues(uniqueCoordinates);
         }
     }
-    
+    console.log(nodeLength);
     for (const node of nodeLength) {
         // create
         const coordinates = generateRandomCoordinate();
@@ -70,6 +70,18 @@ export function generateBridges(nodeLength) {
     const randomValues = randomArray(randomBridgeLength, nodeLength);
     const filteredArray = [...new Set(randomValues)]
     return filteredArray;
+}
+
+export function getNodeCoordinates(stateArray) {
+    const coorArr = [];
+    console.log("hello I am coordinates");
+    const nodes = document.querySelectorAll(".node");
+    console.log(nodes);
+    for (const item of nodes) {
+        const pos = item.getBoundingClientRect();
+        coorArr.push(pos);
+    }
+    stateArray(coorArr);
 }
 
 
