@@ -2,19 +2,14 @@ import "./node.scss";
 import React from "react";
 
 function Node(props) {
-    const [nodeValue, setNodeValue] = React.useState(getRandomInt(10));
-    const { id } = props;
-
-    function getRandomInt(max) {
-        return Math.floor(Math.random() * Math.floor(max) + 1);
-    }
+    const { id, value } = props;
 
     function handleClick() {
-        console.log(nodeValue);
+        console.log(value);
     }
     return (
         <div id={id} className="node" onClick={handleClick}>
-            {nodeValue}
+            {value}
         </div>
     )
 }
