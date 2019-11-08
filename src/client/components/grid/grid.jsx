@@ -22,7 +22,6 @@ function Grid(props) {
     function bridgeValidator(index, nodeNumber) {
         let bridge = generateBridges(nodeNumber);
         if (bridge.includes(index)) {
-            console.log("invalid bridge");
             const newBridge = generateBridges(nodeNumber);
             bridge = newBridge;
             return bridgeValidator(index, nodeNumber);
@@ -42,7 +41,7 @@ function Grid(props) {
     const nodeValueArray = generateRandomArray(nodeNumber, totalBridges);
     return (
         <div className="grid-container">
-            <GridItem rowLength={rowLength} columnsLength={columnsLength} nodeLength={nodeLength} nodeValues={nodeValueArray} />
+            <GridItem rowLength={rowLength} columnsLength={columnsLength} nodeLength={nodeLength} nodeValues={nodeValueArray} bridges={bridgeArray}/>
             <Line bridges={bridgeArray} />
         </div>
     )
