@@ -1,4 +1,4 @@
-import { generateBridges, generateGridArr, generateNodeCoordinates } from "../grid/grid.helpers.jsx";
+import { generateGridArr, generateNodeCoordinates } from "../grid/grid.helpers.jsx";
 import Node from "../node/node.jsx";
 import React from "react";
 
@@ -8,12 +8,15 @@ function gridItem(props) {
     React.useEffect( () => {
         // setNodeValues(nodeValues);
     }, [])
+    console.log(generatedNodeValues, "generated");
     // console.log(generatedNodeValues, "nodeValues");
     
+    
+    let gridMaker;
+    // if (generatedNodeValues) {
     const gridArray = generateGridArr(rowLength, columnsLength); // returns array that represents grid
-
+    
     const nodeCordinates = generateNodeCoordinates(nodeLength, rowLength.length, columnsLength.length);
-
     let count = 0;
     for (const node of nodeCordinates) {
         for (const [index, item] of gridArray.entries()) {
@@ -28,12 +31,14 @@ function gridItem(props) {
             }
         }
     }
-    const gridMaker = gridArray.map((item, index) => {
+
+    gridMaker = gridArray.map((item, index) => {
         const rowMaker = item.map((row, rowIndex) => {
             if (row.active) {
-                console.log(row.count, "this is the counter value")
+                console.log(rowIndex, "this is the rowIndex");
+                console.log(row._id, "this is the row id");
                 return (
-                    <div className="row" key={rowIndex}><Node id={row._id} value={nodeValues[row._id]} /></div>
+                    <div className="row" key={row._id + "row"}><Node id={row._id} value={nodeValues[row._id]} /></div>
                 )
             } else {
                 return (
@@ -45,6 +50,7 @@ function gridItem(props) {
             <div className="col" key={index}>{rowMaker}</div>
         )
     })
+    // }
     return (
         <React.Fragment>
             {gridMaker}
