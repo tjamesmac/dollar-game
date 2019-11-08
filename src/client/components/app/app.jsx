@@ -6,7 +6,7 @@ function App() {
     return (
         <div>
             Hello world!
-            <Grid colNumber={5} rowNumber={5} nodeNumber={5} />
+            <Grid colNumber={10} rowNumber={10} nodeNumber={3} />
         </div>
     )
 }
