@@ -4,10 +4,14 @@ import { getNodeCoordinates } from "../grid/grid.helpers.jsx";
 function Line(props) {
     const [coordinates, setCoordinates] = React.useState(null);
     const { bridges } = props;
-
+    function coordinateSetter() {
+        const wa = getNodeCoordinates();
+        setCoordinates(wa);
+    }
     React.useEffect(() => {
-        const coor = getNodeCoordinates();
-        setCoordinates(coor);
+        window.addEventListener("load", () => {
+            coordinateSetter();
+        })
     }, [])
     let line;
     let renderLines;
@@ -15,17 +19,17 @@ function Line(props) {
         const svgStyle = {
             position: "absolute",
             pointerEvents: "none",
+            "zIndex": "1",
         }
         const lineStyle = {
             stroke: "black",
+            "zIndex": "1",
         }
         const lineArray = [];
         let count = 0;
         for (let [index, coor] of bridges.entries()) {
             coor.map( (item, i) => {
-                console.log(index," this should be index");
-                console.log(coordinates," this should be index");
-                line = <svg height="500" width="500" style={svgStyle} key={count}>
+                line = <svg height="1000" width="1000" style={svgStyle} key={count}>
                     <line x1={coordinates[index].x + 20} y1={coordinates[index].y} x2={coordinates[item].x + 20} y2={coordinates[item].y} style={lineStyle}/>
                 </svg>
                 lineArray.push(line);
