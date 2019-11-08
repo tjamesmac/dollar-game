@@ -3,8 +3,7 @@ import React from "react";
 
 function Node(props) {
     const [nodeValue, setNodeValue] = React.useState(getRandomInt(10));
-    const { name, bridges, id } = props;
-    console.log(bridges);
+    const { id } = props;
 
     function getRandomInt(max) {
         return Math.floor(Math.random() * Math.floor(max) + 1);

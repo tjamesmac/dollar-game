@@ -72,16 +72,14 @@ export function generateBridges(nodeLength) {
     return filteredArray;
 }
 
-export function getNodeCoordinates(stateArray) {
+export function getNodeCoordinates() {
     const coorArr = [];
-    console.log("hello I am coordinates");
     const nodes = document.querySelectorAll(".node");
-    console.log(nodes);
     for (const item of nodes) {
         const pos = item.getBoundingClientRect();
         coorArr.push(pos);
     }
-    stateArray(coorArr);
+    return coorArr;
 }
 
 
