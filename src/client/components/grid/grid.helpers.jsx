@@ -57,7 +57,7 @@ export function generateNodeCoordinates(nodeLength, rowNumber, colNumber) {
     return validCoordinates;
 }
 
-export function generateBridges(nodeLength) {
+export function generateBridges(nodeLength) { // returns an array of bridges between 1 - nodeLength [1, 2, 3]
     const maximumBridges = nodeLength - 1;
     function getRandomIntMinMax(min, max) {
         min = Math.ceil(min);
