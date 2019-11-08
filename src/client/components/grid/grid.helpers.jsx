@@ -85,7 +85,15 @@ export function generateRandomArray(nodeLength, numberOfBridges) { // generate r
     const totalArray = randomValues.reduce((a, b) => a + b);
     const numberCheck = nodeLength - bridgeLength + 1;
     console.log(totalArray, numberCheck, "Total number in the array, >= numberofnodes - brides + 1");
-    
+    const positiveCheck = [];
+    for (const numbder of randomValues) {
+        if (numbder >= 0) {
+            positiveCheck.push(numbder)
+        }
+    }
+    if (positiveCheck.length === nodeLength) {
+        return generateRandomArray(nodeLength, numberOfBridges);
+    }
     if (totalArray >= numberCheck && totalArray > 0) {
         return randomValues;
     } else {
