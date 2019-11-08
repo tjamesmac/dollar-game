@@ -32,11 +32,8 @@ export function generateNodeCoordinates(nodeLength, rowNumber, colNumber) {
         const uniqueCoordinates = uniquePairs(coordinateArrayCheck);
 
         if (uniqueCoordinates.length === nodeLength.length) {
-            console.log("Coordinates complete and are unique");
             return uniqueCoordinates;
         } else {
-            console.log("not unique");
-
             // generate coordinate
             const extraCoordinates = generateRandomCoordinate();
 
@@ -47,7 +44,6 @@ export function generateNodeCoordinates(nodeLength, rowNumber, colNumber) {
             return checkUniqueValues(uniqueCoordinates);
         }
     }
-    console.log(nodeLength);
     for (const node of nodeLength) {
         // create
         const coordinates = generateRandomCoordinate();
@@ -80,6 +76,21 @@ export function getNodeCoordinates() {
         coorArr.push(pos);
     }
     return coorArr;
+}
+
+export function generateRandomArray(nodeLength, numberOfBridges) { // generate random numbers between two values and should be node length
+    const bridgeLength = numberOfBridges;
+    const randomArray = (length, min, max) => [...new Array(length)].map(() => Math.floor(Math.random() * (max - min)) + min);
+    const randomValues = randomArray(nodeLength, -9, 9);
+    const totalArray = randomValues.reduce((a, b) => a + b);
+    const numberCheck = nodeLength - bridgeLength + 1;
+    console.log(totalArray, numberCheck, "Total number in the array, >= numberofnodes - brides + 1");
+    
+    if (totalArray >= numberCheck && totalArray > 0) {
+        return randomValues;
+    } else {
+        return generateRandomArray(nodeLength, numberOfBridges);
+    }
 }
 
 
