@@ -7,7 +7,7 @@ function App() {
         <div>
 
             <span className="bold-text">The Dollar Game!</span>
-            <Grid colNumber={10} rowNumber={10} nodeNumber={3} />
+            <Grid colNumber={5} rowNumber={5} nodeNumber={3} />
 
         </div>
     )
