@@ -9,21 +9,30 @@ import React from "react";
 
 function gridItem(props) {
     const { rowLength, columnsLength, nodeLength, nodeValues, bridges } = props;
-    const [generatedNodeValues, setNodeValues] = React.useState(null);
-    console.log(bridges, "need these bridges");
-    function nodeValueSetter(val) {
-        setNodeValues(val)
-    }
-    React.useEffect( () => {
-        nodeValueSetter(nodeValues)
-    }, [])
+    const [generatedNodeValues, setNodeValues] = React.useState(nodeValues);
+    const [number, setNumber] = React.useState(0);
 
-    function nodeClick(nodeID) {
-        console.log("hello");
-        console.log(nodeID);
-        console.log(generatedNodeValues[nodeID])
+    function nodeClick(nodeID, val) {
+        console.log(nodeID, "this is the nodeID");
+        console.log(val, "this is the nodeID");
+        const oldValues = generatedNodeValues;
+        const id = nodeID;
+        let value = generatedNodeValues[nodeID]
+        const numberOfBridges = bridges[id].length;
+
+        let clickedNodeValue = value - numberOfBridges;
+        oldValues[id] = clickedNodeValue;
+        for (let bridgeVal of bridges[id]) {
+            oldValues[bridgeVal] = oldValues[bridgeVal] + 1;
+        }
+        const a = oldValues;
+        // setNumber(number+1);
+        setNodeValues(a => [...a, oldValues])
+        console.log(generatedNodeValues);
     }
-    
+    function testClicker() {
+        setNumber(number + 1);
+    }
     let gridMaker;
     if (generatedNodeValues) {
 
@@ -48,12 +57,14 @@ function gridItem(props) {
             const rowMaker = item.map((row, rowIndex) => {
                 if (row.active) {
                     console.log(row._id, "this is the id")
+                    console.log(generatedNodeValues, "these are the values before the node");
                     return (
                         <div
+                            onClick={() => nodeClick(row._id, generatedNodeValues[row._id])}
                             className="row"
                             key={row._id + "row"}
                         >
-                            <Node id={row._id} value={generatedNodeValues[row._id]} clickHandler={() => nodeClick(row._id)} />
+                            <Node id={row._id} value={generatedNodeValues[row._id]}  />
                         </div>
                     )
                 } else {
@@ -67,6 +78,7 @@ function gridItem(props) {
             )
         })
     }
+    console.log(generatedNodeValues);
     return (
         <React.Fragment>
             {gridMaker}
