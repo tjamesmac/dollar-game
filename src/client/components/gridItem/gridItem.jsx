@@ -1,47 +1,46 @@
-import { generateGridArr, generateNodeCoordinates } from "../grid/grid.helpers.jsx";
 import Node from "../node/node.jsx";
 import React from "react";
 
-// have values
-// get bridges
-// need to minus values on click from bridge values
+// Lines aren't always matched up to the right nodes
+// think we have the bridges backwards
+// we need to subtract the values from every node that has a bridge with that ID
 
 
 function gridItem(props) {
-    const { rowLength, columnsLength, nodeLength, nodeValues, bridges } = props;
+    const { nodeValues, bridges, gridArr, nodeCoor } = props;
     const [generatedNodeValues, setNodeValues] = React.useState(nodeValues);
-    const [number, setNumber] = React.useState(0);
 
-    function nodeClick(nodeID, val) {
-        console.log(nodeID, "this is the nodeID");
-        console.log(val, "this is the nodeID");
+    function nodeClick(nodeID) {
+
         const oldValues = generatedNodeValues;
         const id = nodeID;
+        console.log(id, "this is my id");
         let value = generatedNodeValues[nodeID]
         const numberOfBridges = bridges[id].length;
 
         let clickedNodeValue = value - numberOfBridges;
         oldValues[id] = clickedNodeValue;
-        for (let bridgeVal of bridges[id]) {
-            oldValues[bridgeVal] = oldValues[bridgeVal] + 1;
+        console.log(bridges, "these are my bridges");
+        // for (let bridgeVal of bridges[id]) {
+        //     oldValues[bridgeVal] = oldValues[bridgeVal] + 1;
+        // }
+        for (let bridgeVal of bridges) {
+            console.log(bridgeVal, "this is bridgeVal")
+            if (bridgeVal[0] === id) {
+                console.log("i'm inside")
+                console.log(bridgeVal[0]);
+                // oldValues[bridgeVal[] = oldValues[bridgeVal[0]] + 1;
+            }
         }
         const a = oldValues;
-        // setNumber(number+1);
         setNodeValues(a => [...a, oldValues])
-        console.log(generatedNodeValues);
-    }
-    function testClicker() {
-        setNumber(number + 1);
     }
     let gridMaker;
     if (generatedNodeValues) {
 
-        const gridArray = generateGridArr(rowLength, columnsLength); // returns array that represents grid
-            
-        const nodeCordinates = generateNodeCoordinates(nodeLength, rowLength.length, columnsLength.length);
         let count = 0;
-        for (const node of nodeCordinates) {
-            for (const [index, item] of gridArray.entries()) {
+        for (const node of nodeCoor) {
+            for (const [index, item] of gridArr.entries()) {
                 if (node[0] === index) {
                     for (const iter of item) {
                         if (node[1] === iter.index) {
@@ -53,11 +52,9 @@ function gridItem(props) {
                 }
             }
         }
-        gridMaker = gridArray.map((item, index) => {
+        gridMaker = gridArr.map((item, index) => {
             const rowMaker = item.map((row, rowIndex) => {
                 if (row.active) {
-                    console.log(row._id, "this is the id")
-                    console.log(generatedNodeValues, "these are the values before the node");
                     return (
                         <div
                             onClick={() => nodeClick(row._id, generatedNodeValues[row._id])}
@@ -78,7 +75,6 @@ function gridItem(props) {
             )
         })
     }
-    console.log(generatedNodeValues);
     return (
         <React.Fragment>
             {gridMaker}

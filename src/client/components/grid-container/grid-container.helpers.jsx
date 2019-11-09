@@ -100,6 +100,24 @@ export function generateRandomArray(nodeLength, numberOfBridges) { // generate r
     }
 }
 
+export function bridgeBuilder(nodeLength) {
+    function bridgeValidator(index, nodeNumber) {
+        let bridge = generateBridges(nodeNumber);
+        if (bridge.includes(index)) {
+            const newBridge = generateBridges(nodeNumber);
+            bridge = newBridge;
+            return bridgeValidator(index, nodeNumber);
+        } else {
+            bridgeArray.push(bridge);
+        }
+    }
+    const bridgeArray = [];
+    for (const node of nodeLength) {
+        bridgeValidator(node, nodeLength.length);
+    }
+    return bridgeArray;
+}
+
 
 
 

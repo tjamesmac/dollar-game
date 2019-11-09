@@ -1,5 +1,5 @@
 import React from "react";
-import { getNodeCoordinates } from "../grid/grid.helpers.jsx";
+import { getNodeCoordinates } from "../grid-container/grid-container.helpers.jsx";
 
 function Line(props) {
     const [coordinates, setCoordinates] = React.useState(null);
@@ -27,6 +27,7 @@ function Line(props) {
         }
         const lineArray = [];
         let count = 0;
+        console.log(bridges, "these are my line bridges");
         for (let [index, coor] of bridges.entries()) {
             coor.map( (item, i) => {
                 line = <svg height="1000" width="1000" style={svgStyle} key={count}>
