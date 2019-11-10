@@ -1,44 +1,33 @@
 import Node from "../node/node.jsx";
 import React from "react";
 
-// Lines aren't always matched up to the right nodes
-// think we have the bridges backwards
-// we need to subtract the values from every node that has a bridge with that ID
+// TODO:
+// make buttons look like they've been clicked
+// fix nodes appearing in a straight line
+// add win condition and let user know they've won
+// add user difficulty setting
+// turns till complete
+// console.log the win number
+// make sure that the lines are unique
 
 
 function GridBuilder(props) {
-    const { nodeValues, bridges, gridArr, nodeCoor } = props;
+    const { nodeValues, gridArr, nodeCoor, connections } = props;
     const [generatedNodeValues, setNodeValues] = React.useState(nodeValues);
+
+
 
     function nodeClick(nodeID) {
 
         const oldValues = generatedNodeValues;
         const id = nodeID;
-        let value = generatedNodeValues[nodeID]
-        const numberOfBridges = bridges[id].length;
+        const allConnections = connections[id];
+        let value = generatedNodeValues[id]
+        oldValues[id] = value - allConnections.length;
 
-        let clickedNodeValue = value - numberOfBridges;
-        oldValues[id] = clickedNodeValue;
-        console.log(bridges, "these are my bridges");
-        // for (let bridgeVal of bridges[id]) {
-        //     oldValues[bridgeVal] = oldValues[bridgeVal] + 1;
-        // }
-        let totalNodesConnected = [];
-        
-        for (const [index, bridgeVal] of bridges.entries()) {
-            console.log(index, bridgeVal, "bridge value");
-            for (const element of bridgeVal) {
-                if (element ===id) {
-                    totalNodesConnected.push(index);
-                }
-            }
+        for (const connection of allConnections) {
+            oldValues[connection] = oldValues[connection] + 1;
         }
-        for (const bridge of totalNodesConnected) {
-            console.log(oldValues[bridge]);
-            console.log(bridge, "bridge inside loop");
-            oldValues[bridge] = oldValues[bridge] + 1
-        }
-        console.log(totalNodesConnected, "totalNodes connected");
         const a = oldValues;
         setNodeValues(a => [...a, oldValues])
     }
