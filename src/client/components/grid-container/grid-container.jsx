@@ -1,6 +1,6 @@
 import "./grid.scss";
 import { bridgeBuilder, generateGridArr, generateNodeCoordinates, generateRandomArray } from "./grid-container.helpers.jsx";
-import GridItem from "../gridItem/gridItem.jsx";
+import GridItem from "../gridBuilder/gridBuilder.jsx";
 import Line from "../line/line.jsx";
 import React from "react";
 
