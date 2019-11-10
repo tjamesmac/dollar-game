@@ -27,16 +27,21 @@ function Line(props) {
         }
         const lineArray = [];
         let count = 0;
-        console.log(bridges, "these are my line bridges");
-        for (let [index, coor] of bridges.entries()) {
-            coor.map( (item, i) => {
-                line = <svg height="1000" width="1000" style={svgStyle} key={count}>
-                    <line x1={coordinates[index].x + 20} y1={coordinates[index].y} x2={coordinates[item].x + 20} y2={coordinates[item].y} style={lineStyle}/>
+        Object.entries(bridges).forEach(([key, val]) => {
+            for (const bridge of val) {
+                line = <svg height="1000" width="1000" style={svgStyle} key={count + " line"}>
+                    <line
+                        x1={coordinates[key].x + 20}
+                        y1={coordinates[key].y}
+                        x2={coordinates[bridge].x + 20}
+                        y2={coordinates[bridge].y}
+                        style={lineStyle}
+                    />
                 </svg>
                 lineArray.push(line);
                 count ++
-            })
-        }
+            }
+        })
         renderLines = lineArray.map((item) => {
             return item;
         })
