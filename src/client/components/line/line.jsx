@@ -5,8 +5,8 @@ function Line(props) {
     const [coordinates, setCoordinates] = React.useState(null);
     const { bridges } = props;
     function coordinateSetter() {
-        const wa = getNodeCoordinates();
-        setCoordinates(wa);
+        const coor = getNodeCoordinates();
+        setCoordinates(coor);
     }
     React.useEffect(() => {
         window.addEventListener("load", () => {
