@@ -7,7 +7,7 @@ function Node(props) {
     return (
         <div id={id} className="node">
             {value}
-            id: {id}
+            {/* id: {id} */}
         </div>
     )
 }
