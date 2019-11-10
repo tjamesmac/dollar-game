@@ -53,29 +53,16 @@ export function generateNodeCoordinates(nodeLength, rowNumber, colNumber) {
     return validCoordinates;
 }
 
-export function generateBridges(nodeLength) { // returns an array of bridges between 1 - nodeLength [1, 2, 3]
-    const maximumBridges = nodeLength - 1;
-    function getRandomIntMinMax(min, max) {
-        min = Math.ceil(min);
-        max = Math.floor(max);
-        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
-    }
-    const randomBridgeLength = getRandomIntMinMax(1, maximumBridges);
-    const randomArray = (length, max) => [...new Array(length)]
-        .map(() => Math.floor(Math.random() * (max - 1)) + 1);
-    const randomValues = randomArray(randomBridgeLength, nodeLength);
-    const filteredArray = [...new Set(randomValues)]
-    return filteredArray;
-}
+
 
 export function getNodeCoordinates() {
-    const coorArr = [];
+    const coorObj = {};
     const nodes = document.querySelectorAll(".node");
     for (const item of nodes) {
-        const pos = item.getBoundingClientRect();
-        coorArr.push(pos);
+        const id = item.getAttribute("id");
+        coorObj[id] = item.getBoundingClientRect();
     }
-    return coorArr;
+    return coorObj;
 }
 
 export function generateRandomArray(nodeLength, numberOfBridges) { // generate random numbers between two values and should be node length
@@ -100,9 +87,26 @@ export function generateRandomArray(nodeLength, numberOfBridges) { // generate r
     }
 }
 
+export function generateBridges(nodeLength) { // returns an array of bridges between 1 - nodeLength [1, 2, 3]
+    const maximumBridges = nodeLength - 1;
+    function getRandomIntMinMax(min, max) {
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+    }
+    const randomBridgeLength = getRandomIntMinMax(1, maximumBridges);
+    const randomArray = (length, max) => [...new Array(length)]
+        .map(() => Math.floor(Math.random() * (max)));
+    const randomValues = randomArray(randomBridgeLength, nodeLength);
+    const filteredArray = [...new Set(randomValues)]
+    return filteredArray;
+    // return randomValues;
+}
+
 export function bridgeBuilder(nodeLength) {
     function bridgeValidator(index, nodeNumber) {
         let bridge = generateBridges(nodeNumber);
+        // prevents node from being connected to itself
         if (bridge.includes(index)) {
             const newBridge = generateBridges(nodeNumber);
             bridge = newBridge;
@@ -118,7 +122,64 @@ export function bridgeBuilder(nodeLength) {
     return bridgeArray;
 }
 
+export function nodeConnections(bridgeArray) {
+    const connectionObject = {};
+    for (const [index, bridge] of bridgeArray.entries()) {
+        if (!connectionObject[index]) {
+            // do something
+            connectionObject[index] = []; // then we set it to nothing
+        }
+        let connectionArray = connectionObject[index]
+        
+        for (const item of bridge) {
+            // console.log(item, "hello item");
+            connectionArray.push(item);
+            if (connectionObject[item]) {
+                
+                connectionObject[item].push(index)
+            } else {
+                connectionObject[item] = [];
+                
+                connectionObject[item].push(index)
+            }
+        }
+        
+    }
+    const test = connectionObject
+    // console.log(test);
+    Object.entries(connectionObject).forEach(([key, val]) => {
+        connectionObject[key] = [...new Set(val)];
+    })
+    console.log(connectionObject);
+    return connectionObject;
+}
 
+/*
+bridge 0 = 1
+bridge 1 = 2
+bridge 2 = 1
 
+bridge 3 = 1
+bridge 3 = 2
+bridge 2 = 3
+bridge 1 = 3
 
-
+bridge 1 = 0
+const connections = {
+  0: [2, 1]
+  1: [0, 2]
+  2: [1, 0]
+}
+const connect2 = {
+    0: [2]
+    1: [2]
+    2: [0, 1]
+}
+const connect3 = {
+    0: (3) [3, 1, 2]
+    1: (3) [0, 3, 3]
+    2: [3]
+    3: (3) [1, 2, 2]
+    4: (3) [3, 3, 1]
+}
+*/
