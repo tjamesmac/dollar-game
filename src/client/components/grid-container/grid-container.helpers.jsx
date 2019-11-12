@@ -71,8 +71,9 @@ export function generateRandomArray(nodeLength, numberOfBridges) { // generate r
     const randomValues = randomArray(nodeLength, -9, 9);
     const totalArray = randomValues.reduce((a, b) => a + b);
     const numberCheck = nodeLength - bridgeLength + 1;
+    console.log(totalArray, numberCheck);
     const positiveCheck = [];
-    for (const numbder of randomValues) {
+    for (const numbder of randomValues) { // checks to make sure all values are not positive
         if (numbder >= 0) {
             positiveCheck.push(numbder)
         }
@@ -100,7 +101,6 @@ export function generateBridges(nodeLength) { // returns an array of bridges bet
     const randomValues = randomArray(randomBridgeLength, nodeLength);
     const filteredArray = [...new Set(randomValues)]
     return filteredArray;
-    // return randomValues;
 }
 
 export function bridgeBuilder(nodeLength) {
@@ -125,61 +125,25 @@ export function bridgeBuilder(nodeLength) {
 export function nodeConnections(bridgeArray) {
     const connectionObject = {};
     for (const [index, bridge] of bridgeArray.entries()) {
-        if (!connectionObject[index]) {
-            // do something
-            connectionObject[index] = []; // then we set it to nothing
+        if (!connectionObject[index]) { // if property doesn't exist
+            connectionObject[index] = []; // make it
         }
-        let connectionArray = connectionObject[index]
-        
+        let connectionArray = connectionObject[index] // if it does exist
         for (const item of bridge) {
-            // console.log(item, "hello item");
             connectionArray.push(item);
             if (connectionObject[item]) {
-                
                 connectionObject[item].push(index)
             } else {
+                // create property to store bridge connection
                 connectionObject[item] = [];
-                
                 connectionObject[item].push(index)
             }
         }
         
     }
-    const test = connectionObject
-    // console.log(test);
     Object.entries(connectionObject).forEach(([key, val]) => {
         connectionObject[key] = [...new Set(val)];
     })
     console.log(connectionObject);
     return connectionObject;
 }
-
-/*
-bridge 0 = 1
-bridge 1 = 2
-bridge 2 = 1
-
-bridge 3 = 1
-bridge 3 = 2
-bridge 2 = 3
-bridge 1 = 3
-
-bridge 1 = 0
-const connections = {
-  0: [2, 1]
-  1: [0, 2]
-  2: [1, 0]
-}
-const connect2 = {
-    0: [2]
-    1: [2]
-    2: [0, 1]
-}
-const connect3 = {
-    0: (3) [3, 1, 2]
-    1: (3) [0, 3, 3]
-    2: [3]
-    3: (3) [1, 2, 2]
-    4: (3) [3, 3, 1]
-}
-*/
