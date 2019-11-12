@@ -28,8 +28,10 @@ function GridBuilder(props) {
         for (const connection of allConnections) {
             oldValues[connection] = oldValues[connection] + 1;
         }
-        const a = oldValues;
-        setNodeValues(a => [...a, oldValues])
+        const newValues = oldValues;
+        console.log(newValues);
+        setNodeValues(newValues => [...newValues]) // this works right now
+
     }
     let makeGrid;
     if (generatedNodeValues) {
