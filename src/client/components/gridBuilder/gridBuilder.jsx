@@ -14,22 +14,21 @@ import React from "react";
 function GridBuilder(props) {
     const { nodeValues, gridArr, nodeCoor, connections } = props;
     const [generatedNodeValues, setNodeValues] = React.useState(nodeValues);
+    const [turnCount, setTurnCount] = React.useState(0);
 
 
 
     function nodeClick(nodeID) {
-
+        setTurnCount(turnCount + 1);
         const oldValues = generatedNodeValues;
         const id = nodeID;
         const allConnections = connections[id];
         let value = generatedNodeValues[id]
         oldValues[id] = value - allConnections.length;
-
         for (const connection of allConnections) {
             oldValues[connection] = oldValues[connection] + 1;
         }
         const newValues = oldValues;
-        console.log(newValues);
         setNodeValues(newValues => [...newValues]) // this works right now
 
     }
@@ -75,6 +74,7 @@ function GridBuilder(props) {
     }
     return (
         <React.Fragment>
+            <div>Turn count: {turnCount}</div>
             {makeGrid}
         </React.Fragment>
     )
