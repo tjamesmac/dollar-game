@@ -6,17 +6,15 @@ import React from "react";
 // fix nodes appearing in a straight line
 // add win condition and let user know they've won
 // add user difficulty setting
-// turns till complete
-// console.log the win number
 // make sure that the lines are unique
 
+// turns till complete
+// console.log the win number
 
 function GridBuilder(props) {
     const { nodeValues, gridArr, nodeCoor, connections } = props;
     const [generatedNodeValues, setNodeValues] = React.useState(nodeValues);
     const [turnCount, setTurnCount] = React.useState(0);
-
-
 
     function nodeClick(nodeID) {
         setTurnCount(turnCount + 1);
