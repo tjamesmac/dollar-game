@@ -8,6 +8,20 @@ function Line(props) {
         const coor = getNodeCoordinates();
         setCoordinates(coor);
     }
+    // this removes duplicates from 'bridges' to prevent copies of same lines
+    function existingBridges(existingBridges) {
+        const uniqueBridges = existingBridges;
+        Object.entries(uniqueBridges).forEach(([key, val]) => {
+            console.log(key, val);
+            for (const item of val) {
+                if (uniqueBridges[item]) {
+                    uniqueBridges[item].splice(key, 1);
+                }
+            }
+        });
+        // console.log(newTest);
+        return uniqueBridges;
+    }
     React.useEffect(() => {
         window.addEventListener("load", () => {
             coordinateSetter();
@@ -27,7 +41,8 @@ function Line(props) {
         }
         const lineArray = [];
         let count = 0;
-        Object.entries(bridges).forEach(([key, val]) => {
+        const singleBridges = existingBridges(bridges) // removes duplicate bridges needed for two way numbers
+        Object.entries(singleBridges).forEach(([key, val]) => {
             for (const bridge of val) {
                 line = <svg height="1000" width="1000" style={svgStyle} key={count + " line"}>
                     <line
