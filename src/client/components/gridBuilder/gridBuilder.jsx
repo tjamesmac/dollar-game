@@ -6,13 +6,15 @@ import React from "react";
 // fix nodes appearing in a straight line
 // add win condition and let user know they've won
 // add user difficulty setting
-// make sure that the lines are unique
 
+// DONE:
+// make sure that the lines are unique
 // turns till complete
 // console.log the win number
 
 function GridBuilder(props) {
     const { nodeValues, gridArr, nodeCoor, connections } = props;
+    const [gameWon, setGameWon] = React.useState(null);
     const [generatedNodeValues, setNodeValues] = React.useState(nodeValues);
     const [turnCount, setTurnCount] = React.useState(0);
 
@@ -28,6 +30,13 @@ function GridBuilder(props) {
         }
         const newValues = oldValues;
         setNodeValues(newValues => [...newValues]) // this works right now
+        const newFilter = newValues.filter(x => x >= 0);
+        console.log(nodeValues);
+        if (newFilter.length === nodeValues.length){
+            console.log("I win");
+            setGameWon(true);
+        }
+        console.log(newFilter);
 
     }
     let makeGrid;
@@ -70,8 +79,14 @@ function GridBuilder(props) {
             )
         })
     }
+    let gameWonAlert;
+    if (gameWon){
+        // gameWonAlert = <div>You have won!</div>
+        alert("You won!")
+    }
     return (
         <React.Fragment>
+            {gameWonAlert}
             <div>Turn count: {turnCount}</div>
             {makeGrid}
         </React.Fragment>
