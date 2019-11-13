@@ -47,6 +47,7 @@ function Line(props) {
         const singleBridges = existingBridges(bridges) // removes duplicate bridges needed for two way numbers
         Object.entries(singleBridges).forEach(([key, val]) => {
             for (const bridge of val) {
+                // line = <svg viewBox="-50 -50 100 100" style={svgStyle} key={count + " line"}>
                 line = <svg height="1000" width="1000" style={svgStyle} key={count + " line"}>
                     <line
                         x1={coordinates[key].x + 20}
