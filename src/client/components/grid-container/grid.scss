@@ -1,15 +1,21 @@
 #app {
-  // display: flex;
+  display: flex;
   // justify-content: center;
-  // flex-direction: column;
+  flex-direction: column;
+  font-size: 26px;
   // align-items: center;
 }
 .grid-container {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   position: relative;
-  // justify-content: center;
-  font-size: 26;
+}
+.line-container {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  top: 0; // this is magic
 }
 
 .text-container {
