@@ -6,7 +6,7 @@ function App() {
     return (
         <React.Fragment>
             <span className="bold-text">The Dollar Game!</span>
-            <GridContainer colNumber={5} rowNumber={5} nodeNumber={5} />
+            <GridContainer columns={15} rows={15} nodes={5} />
         </React.Fragment>
     )
 }
