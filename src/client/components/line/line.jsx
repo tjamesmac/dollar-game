@@ -33,11 +33,6 @@ function Line(props) {
     let line;
     let renderLines;
     if (coordinates) {
-        const svgStyle = {
-            position: "absolute",
-            pointerEvents: "none",
-            "zIndex": "1",
-        }
         const lineStyle = {
             stroke: "black",
             "zIndex": "1",
@@ -47,8 +42,8 @@ function Line(props) {
         const singleBridges = existingBridges(bridges) // removes duplicate bridges needed for two way numbers
         Object.entries(singleBridges).forEach(([key, val]) => {
             for (const bridge of val) {
-                // line = <svg viewBox="-50 -50 100 100" style={svgStyle} key={count + " line"}>
-                line = <svg height="1000" width="1000" style={svgStyle} key={count + " line"}>
+                // line = <svg className="line-container" viewBox="0 0 100 100" key={count + " line"}>
+                line = <svg className="line-container" height="50vh" width="50vw" key={count + " line"}>
                     <line
                         x1={coordinates[key].x + 20}
                         y1={coordinates[key].y}
