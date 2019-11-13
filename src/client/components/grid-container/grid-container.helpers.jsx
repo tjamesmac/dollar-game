@@ -16,7 +16,9 @@ export function generateGridArr(rows, columns) {
 }
 
 // generates random numbers between the values we want
-export function generateNodeCoordinates(nodeLength, rowNumber, colNumber) {
+export function generateNodeCoordinates(requirements) {
+    console.log(requirements);
+    const { amountOfNodes, columns, rows } = requirements;
     const coordinateArray = [];
     function generateRandomCoordinate() { // get randomised coordinate array
         function getRandomIntMinMax(min, max) {
@@ -24,14 +26,14 @@ export function generateNodeCoordinates(nodeLength, rowNumber, colNumber) {
             max = Math.floor(max);
             return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
         }
-        const randomCoordinates = [getRandomIntMinMax(0, rowNumber), getRandomIntMinMax(0, colNumber)]; // amount of rows - columns
+        const randomCoordinates = [getRandomIntMinMax(0, rows), getRandomIntMinMax(0, columns)]; // amount of rows - columns
         return randomCoordinates;
     }
     function checkUniqueValues(coordinateArrayCheck) { //
         const uniquePairs = pairs => [...new Set(pairs.map(pair => JSON.stringify(pair)))].map(pair => JSON.parse(pair)); // converts to a JSON and pushed into a set
         const uniqueCoordinates = uniquePairs(coordinateArrayCheck);
 
-        if (uniqueCoordinates.length === nodeLength.length) {
+        if (uniqueCoordinates.length === amountOfNodes.length) {
             return uniqueCoordinates;
         } else {
             // generate coordinate
@@ -44,7 +46,7 @@ export function generateNodeCoordinates(nodeLength, rowNumber, colNumber) {
             return checkUniqueValues(uniqueCoordinates);
         }
     }
-    for (const node of nodeLength) {
+    for (const node of amountOfNodes) {
         // create
         const coordinates = generateRandomCoordinate();
         coordinateArray.push(coordinates);

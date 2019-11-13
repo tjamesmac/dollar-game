@@ -1,17 +1,83 @@
+// variables
+
+// baseUnit
+$base-unit: 50px;
+
+
 .node {
+  // positioning
+
   display: flex;
-  width: 50px;
-  height: 50px;
-  background-color: rgb(255, 0, 0);
+  align-items: center;
+  justify-content: center;
+  width: $base-unit;
+  height: $base-unit;
   border-radius: 50%;
   z-index: 10;
   text-align: center;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
 
-  &:active {
-    background-color: darkred;
+  // styling
+
+  box-shadow: 0 0 10px 0 rgba(0,0,0,0.1);
+  background-color: white;
+  color: black;
+  border: 2px solid #6800BF;
+  cursor: pointer;
+
+  &:hover {
+    background-color: #45007F; 
     color: white;
   }
+
+  
+  &:active {
+    background-color:#230040;
+    color: white;
+    transform: translateY(2px);
+  }
+}
+
+.node:active{
+  -webkit-animation:node .4s both;animation:node .4s both
+}
+@-webkit-keyframes node{0%{-webkit-transform:scale(.5);transform:scale(.5)}100%{-webkit-transform:scale(1);transform:scale(1)}}@keyframes node{0%{-webkit-transform:scale(.5);transform:scale(.5)}100%{-webkit-transform:scale(1);transform:scale(1)}}
+
+.refresh{
+  border-radius: 50%;
+  margin-left: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  color: black;
+  border: none;
+  outline: none;
+}
+
+.refresh-icon{
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  fill: blue;
+}
+
+.undo{
+  border-radius: 50%;
+  margin-left: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  background-color: white;
+  color: black;
+  border: 2px solid #6800BF;
+}
+
+.button-container{
+  display: flex;
+  flex-direction: row;
 }

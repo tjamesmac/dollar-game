@@ -1,5 +1,6 @@
 import Node from "../node/node.jsx";
 import React from "react";
+import { generateNodeCoordinates } from "../grid-container/grid-container.helpers.jsx";
 
 // TODO:
 // make buttons look like they've been clicked
@@ -12,8 +13,8 @@ import React from "react";
 // turns till complete
 // console.log the win number
 
-function GridBuilder(props) {
-    const { nodeValues, gridArr, nodeCoor, connections } = props;
+function BuildGrid(props) {
+    const { nodeValues, gridArr, nodeCoor, connections, nodes, rows, columns } = props;
     const [gameWon, setGameWon] = React.useState(null);
     const [generatedNodeValues, setNodeValues] = React.useState(nodeValues);
     const [turnCount, setTurnCount] = React.useState(0);
@@ -77,9 +78,12 @@ function GridBuilder(props) {
         })
     }
     let gameWonAlert;
-    if (gameWon){
+    if (gameWon) {
         alert("You won!")
-        location.reload();
+        //  location.reload();
+        // console.log(nodes, rows, columns);
+        // const newCoordinates = generateNodeCoordinates(nodes, rows, columns);
+        // setNodeValues(newCoordinates);
     }
     return (
         <React.Fragment>
@@ -90,4 +94,4 @@ function GridBuilder(props) {
     )
 }
 
-export default GridBuilder;
+export default BuildGrid;
