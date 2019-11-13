@@ -31,13 +31,10 @@ function GridBuilder(props) {
         const newValues = oldValues;
         setNodeValues(newValues => [...newValues]) // this works right now
         const newFilter = newValues.filter(x => x >= 0);
-        console.log(nodeValues);
         if (newFilter.length === nodeValues.length){
             console.log("I win");
             setGameWon(true);
         }
-        console.log(newFilter);
-
     }
     let makeGrid;
     if (generatedNodeValues) {
