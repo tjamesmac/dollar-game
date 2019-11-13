@@ -4,13 +4,15 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "webpack-dev-server --open --config ./util/webpack.dev.js",
-    "build:prod": "webpack --config ./util/webpack.prod.js"
+    "build:dev": "webpack-dev-server --open --config ./util/webpack.dev.js",
+    "build:prod": "webpack --config ./util/webpack.prod.js",
+    "start": "node ./src/server/server.js"
   },
   "keywords": [],
   "author": "tjamesmac <tjamesmac@gmail.com>",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.17.1",
     "react": "^16.11.0",
     "react-dom": "^16.11.0"
   },
