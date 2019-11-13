@@ -10,9 +10,12 @@ function Line(props) {
     }
     // this removes duplicates from 'bridges' to prevent copies of same lines
     function existingBridges(existingBridges) {
-        const uniqueBridges = existingBridges;
+        // creates deep copy of an object
+        // doesn't rely on reference in memory
+        // doesn't overwrite existing bridges causing the nodes to not pass values correctly
+        const uniqueBridges = JSON.parse(JSON.stringify(existingBridges));
+        console.log(uniqueBridges, "these are unique")
         Object.entries(uniqueBridges).forEach(([key, val]) => {
-            console.log(key, val);
             for (const item of val) {
                 if (uniqueBridges[item]) {
                     uniqueBridges[item].splice(key, 1);
