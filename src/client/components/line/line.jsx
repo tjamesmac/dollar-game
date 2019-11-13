@@ -4,10 +4,6 @@ import { getNodeCoordinates } from "../grid-container/grid-container.helpers.jsx
 function Line(props) {
     const [coordinates, setCoordinates] = React.useState(null);
     const { bridges } = props;
-    function coordinateSetter() {
-        const coor = getNodeCoordinates();
-        setCoordinates(coor);
-    }
     // this removes duplicates from 'bridges' to prevent copies of same lines
     function existingBridges(existingBridges) {
         // creates deep copy of an object
@@ -27,7 +23,8 @@ function Line(props) {
     }
     React.useEffect(() => {
         window.addEventListener("load", () => {
-            coordinateSetter();
+            const getCoordinates = getNodeCoordinates();
+            setCoordinates(getCoordinates);
         })
     }, [])
     let line;
@@ -43,7 +40,7 @@ function Line(props) {
         Object.entries(singleBridges).forEach(([key, val]) => {
             for (const bridge of val) {
                 // line = <svg className="line-container" viewBox="0 0 100 100" key={count + " line"}>
-                line = <svg className="line-container" height="50vh" width="50vw" key={count + " line"}>
+                line = <svg className="line-container" height="1000px" width="1000px" key={count + " line"}>
                     <line
                         x1={coordinates[key].x + 20}
                         y1={coordinates[key].y}
