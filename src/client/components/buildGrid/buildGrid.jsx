@@ -3,15 +3,13 @@ import React from "react";
 import { generateNodeCoordinates } from "../grid-container/grid-container.helpers.jsx";
 
 // TODO:
-// make buttons look like they've been clicked
 // fix nodes appearing in a straight line
 // add win condition and let user know they've won
 // add user difficulty setting
+// align everything
+// add undo button
+// add function to refresh button
 
-// DONE:
-// make sure that the lines are unique
-// turns till complete
-// console.log the win number
 
 function BuildGrid(props) {
     const { nodeValues, gridArr, nodeCoor, connections, nodes, rows, columns } = props;
