@@ -78,8 +78,8 @@ function GridBuilder(props) {
     }
     let gameWonAlert;
     if (gameWon){
-        // gameWonAlert = <div>You have won!</div>
         alert("You won!")
+        location.reload();
     }
     return (
         <React.Fragment>
