@@ -4,12 +4,10 @@ import React from "react";
 function App() {
 
     return (
-        <div>
-
+        <React.Fragment>
             <span className="bold-text">The Dollar Game!</span>
-            <GridContainer colNumber={10} rowNumber={10} nodeNumber={5} />
-
-        </div>
+            <GridContainer colNumber={5} rowNumber={5} nodeNumber={5} />
+        </React.Fragment>
     )
 }
 
