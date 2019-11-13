@@ -6,7 +6,8 @@
   "scripts": {
     "build:dev": "webpack-dev-server --open --config ./util/webpack.dev.js",
     "build:prod": "webpack --config ./util/webpack.prod.js",
-    "start": "node ./src/server/server.js"
+    "start": "node ./src/server/server.js",
+    "heroku-postbuild": "npm run build:prod"
   },
   "keywords": [],
   "author": "tjamesmac <tjamesmac@gmail.com>",
