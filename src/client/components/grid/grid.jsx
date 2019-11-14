@@ -1,5 +1,5 @@
 import "./grid.scss";
-import { bridgeBuilder, generateGrid, generateNodeCoordinates, generateRandomArray, getAmountofBridges, nodeConnections } from "./grid-container.helpers.jsx";
+import { bridgeBuilder, generateGrid, generateNodeCoordinates, generateRandomArray, getAmountofBridges, nodeBridges } from "./grid-container.helpers.jsx";
 import GridItem from "../buildGrid/buildGrid.jsx";
 import Line from "../line/line.jsx";
 import React from "react";
@@ -10,9 +10,8 @@ function Grid(props) {
     const amountOfNodes = [...Array(nodes).keys()];
 
     const builtBridges = bridgeBuilder(amountOfNodes);
-    const connectionMaker = nodeConnections(builtBridges);
     const amountOfBridges = getAmountofBridges(builtBridges);
-
+    const connectionMaker = nodeBridges(builtBridges);
     const randomValues = generateRandomArray(nodes, amountOfBridges);
     const gridArray = generateGrid(rows, columns); // returns array that represents grid
 
