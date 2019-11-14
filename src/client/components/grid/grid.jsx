@@ -1,6 +1,6 @@
 import "./grid.scss";
-import { bridgeBuilder, generateGrid, generateNodeCoordinates, generateRandomValues, getAmountofBridges, nodeBridges } from "./grid-container.helpers.jsx";
-import GridItem from "../buildGrid/buildGrid.jsx";
+import { bridgeBuilder, generateGrid, generateNodeCoordinates, generateRandomValues, getAmountofBridges, nodeBridges } from "./grid.helpers.jsx";
+import BuildGrid from "../buildGrid/buildGrid.jsx";
 import Line from "../line/line.jsx";
 import React from "react";
 
@@ -23,7 +23,7 @@ function Grid(props) {
     return (
         <>
             <div className="grid-container">
-                <GridItem
+                <BuildGrid
                     nodeValues={randomNodeValues}
                     bridges={builtBridges}
                     gridArr={grid}

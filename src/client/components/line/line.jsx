@@ -1,5 +1,5 @@
 import React from "react";
-import { getNodeCoordinates } from "../grid/grid-container.helpers.jsx";
+import { getNodeCoordinates } from "../grid/grid.helpers.jsx";
 
 function Line(props) {
     const [coordinates, setCoordinates] = React.useState(null);
