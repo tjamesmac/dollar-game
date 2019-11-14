@@ -1,6 +1,6 @@
 import Node from "../node/node.jsx";
 import React from "react";
-import { generateNodeCoordinates } from "../grid/grid.helpers.jsx";
+// import { generateNodeCoordinates } from "../grid/grid.helpers.jsx";
 
 // TODO:
 // make buttons look like they've been clicked
@@ -57,14 +57,14 @@ function BuildGrid(props) {
                 }
             }
         }
-        buildGrid = grid.map((item, index) => {
-            const buildRows = item.map((row, rowIndex) => {
-                if (row.active) {
-                    const nodeID = row._id;
+        buildGrid = grid.map((row, rowIndex) => {
+            const buildRows = row.map((cell, cellIndex) => {
+                if (cell.active) {
+                    const nodeID = cell._id;
                     return (
                         <div
                             onClick={() => handleClick(nodeID, getNodeValues[nodeID])}
-                            className="row"
+                            className="cell"
                             key={nodeID + "row"}
                         >
                             <Node id={nodeID} value={getNodeValues[nodeID]} />
@@ -72,12 +72,12 @@ function BuildGrid(props) {
                     )
                 } else {
                     return (
-                        <div className="row" key={rowIndex}></div>
+                        <div className="cell" key={cellIndex}></div>
                     )
                 }
             })
             return (
-                <div className="col" key={index}>{buildRows}</div>
+                <div className="row" key={rowIndex}>{buildRows}</div>
             )
         })
     }
