@@ -1,18 +1,27 @@
 export function generateGridArr(rows, columns) {
-    const gridArray = [];
+    const numOfRows = [...Array(rows).keys()];
+    const grid = [];
     for (const col of columns) {
-        const rowArray = [];
-        for (const item of rows) {
-            const obj = {};
-            obj.index = item;
-            obj.active = false;
-            obj.bridges = null;
-            obj._id = null;
-            rowArray.push(obj);
-        }
-        gridArray.push(rowArray);
+        // const rowArray = [];
+        // for (const item of numOfRows) {
+        //     const cell = {};
+        //     cell.index = item;
+        //     cell.active = false;
+        //     cell.bridges = null;
+        //     cell._id = null;
+        //     rowArray.push(cell);
+        // }
+        const row = numOfRows.map((item) => {
+            const cell = {};
+            cell.index = item;
+            cell.active = false;
+            cell.bridges = null;
+            cell._id = null;
+            return cell;
+        })
+        grid.push(row);
     }
-    return gridArray;
+    return grid;
 }
 
 // generates random numbers between the values we want
