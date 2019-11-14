@@ -79,29 +79,28 @@ export function getNodeCoordinates() {
     return coorObj;
 }
 // generate random numbers between two values and should be node length
-export function generateRandomArray(nodeLength, numberOfBridges) {
-    const bridgeLength = numberOfBridges;
-    const randomArray = (length, min, max) => [...new Array(length)].map(() => Math.floor(Math.random() * (max - min)) + min);
-    const randomValues = randomArray(nodeLength, -9, 9);
-    const totalArray = randomValues.reduce((a, b) => a + b);
-    const numberCheck = nodeLength - bridgeLength + 1;
-    console.log(totalArray, numberCheck);
-    const positiveCheck = [];
-    for (const numbder of randomValues) { // checks to make sure all values are not positive
-        if (numbder >= 0) {
-            positiveCheck.push(numbder)
-        }
+export function generateRandomValues(nodes, numOfBridges) {
+    const MIN = -9;
+    const MAX = 9;
+    // returns array of values between range
+    const getRandomValues = (length, min, max) => [...new Array(length)].map(() => Math.floor(Math.random() * (max - min)) + min);
+    const randomValues = getRandomValues(nodes, MIN, MAX);
+    const addedNodeValues = randomValues.reduce((a, b) => a + b);
+    const minNodeValues = nodes - numOfBridges + 1;
+    console.log(addedNodeValues, minNodeValues);
+    const amountOfPositives = randomValues.filter( (x) => x >= 0)
+    if (amountOfPositives.length === nodes) {
+        // if all numbers are positive then the game has already been won
+        return generateRandomValues(nodes, numOfBridges);
     }
-    if (positiveCheck.length === nodeLength) {
-        return generateRandomArray(nodeLength, numberOfBridges);
-    }
-    if (totalArray >= numberCheck && totalArray > 0) {
+    // if added node values is higher than minimum required and above zero
+    // game is possible
+    if (addedNodeValues >= minNodeValues && addedNodeValues > 0) {
         return randomValues;
     } else {
-        return generateRandomArray(nodeLength, numberOfBridges);
+        return generateRandomValues(nodes, numOfBridges);
     }
 }
-
 // returns an array of numbers between 1 - array.length
 export function generateBridges(numOfNodes) {
     const maximumBridges = numOfNodes - 1;
