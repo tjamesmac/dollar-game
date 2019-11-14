@@ -12,15 +12,15 @@ text-align: center;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  
 }
 .line-container {
-  position: absolute;
   pointer-events: none;
   z-index: 1;
-  top: 0; // this is magic
 }
-
+.svg-line {
+  position: absolute;
+  // top: 0;
+}
 .line{
   stroke: rgb(129, 129, 129);
   z-index: 1;

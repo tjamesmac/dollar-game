@@ -39,17 +39,15 @@ function buildLines(props) {
         const singleBridges = existingBridges(bridges) // removes duplicate bridges needed for two way numbers
         Object.entries(singleBridges).forEach(([key, val]) => {
             for (const bridge of val) {
-                // line = <svg className="line-container" viewBox="0 0 100 100" key={count + " line"}>
-                line = <svg className="line-container" height="1000px" width="1000px" key={count + " line"}>
-                    <line
-                        className="line"
-                        x1={coordinates[key].x + 20}
-                        y1={coordinates[key].y}
-                        x2={coordinates[bridge].x + 20}
-                        y2={coordinates[bridge].y}
-                        style={lineStyle}
-                    />
-                </svg>
+                line = <line
+                    className="line"
+                    key={count + " line"}
+                    x1={coordinates[key].x + 20}
+                    y1={coordinates[key].y}
+                    x2={coordinates[bridge].x + 20}
+                    y2={coordinates[bridge].y}
+                    style={lineStyle}
+                />
                 lineArray.push(line);
                 count ++
             }
