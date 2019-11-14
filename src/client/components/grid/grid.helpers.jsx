@@ -59,21 +59,21 @@ export function generateNodeCoordinates(requirements) {
             return checkUniqueValues(uniqueCoordinates);
         }
     }
-    const coordinateArray = amountOfNodes.map((node) => {
-        const coordinates = generateCoordinate(maxRange);
-        return coordinates;
+    const coordinateArray = amountOfNodes.map(() => {
+        return generateCoordinate(maxRange);
     });
     const validCoordinates = checkUniqueValues(coordinateArray);
     return validCoordinates;
 }
 export function getNodeCoordinates() {
-    const coorObj = {};
-    const nodes = document.querySelectorAll(".node");
-    for (const item of nodes) {
-        const id = item.getAttribute("id");
-        coorObj[id] = item.getBoundingClientRect();
+    // think this could be an array;
+    const DOMcoordinates = {};
+    const DOMnodes = document.querySelectorAll(".node");
+    for (const node of DOMnodes) {
+        const id = node.getAttribute("id");
+        DOMcoordinates[id] = node.getBoundingClientRect();
     }
-    return coorObj;
+    return DOMcoordinates;
 }
 // generate random numbers between two values and should be node length
 export function generateRandomValues(nodes, numOfBridges) {
