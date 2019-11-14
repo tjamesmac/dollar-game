@@ -1,3 +1,7 @@
+// takes specified rows and columns
+// returns an array that makes up a grid
+// each cell in a row is made up of an object
+// this allows insertion of 'node'
 export function generateGrid(rows, columns) {
     const numOfRows = [...Array(rows).keys()];
     const numOfColumns = [...Array(columns).keys()];
@@ -13,6 +17,13 @@ export function generateGrid(rows, columns) {
         return row;
     })
     return grid;
+}
+export function getAmountofBridges(allBridges) {
+    let amountOfBridges = 0;
+    for (const bridges of allBridges) {
+        amountOfBridges += bridges.length;
+    }
+    return amountOfBridges;
 }
 
 // generates random numbers between the values we want
