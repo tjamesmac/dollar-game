@@ -11,7 +11,7 @@ function Grid(props) {
 
     const builtBridges = bridgeBuilder(amountOfNodes);
     const amountOfBridges = getAmountofBridges(builtBridges);
-    const connectionMaker = nodeBridges(builtBridges);
+    const attachBridges = nodeBridges(builtBridges);
     const randomValues = generateRandomArray(nodes, amountOfBridges);
     const gridArray = generateGrid(rows, columns); // returns array that represents grid
 
@@ -34,12 +34,12 @@ function Grid(props) {
                     bridges={builtBridges}
                     gridArr={gridArray}
                     nodeCoor={nodeCordinates}
-                    connections={connectionMaker}
+                    connections={attachBridges}
                     columns={columns}
                     rows={rows}
                     nodes={amountOfNodes}
                 />
-                <Line bridges={connectionMaker} />
+                <Line bridges={attachBridges} />
             </div>
             <div className="button-container">
                 <button className="refresh">
