@@ -6,9 +6,13 @@ import React from "react";
 // fix nodes appearing in a straight line
 // add win condition and let user know they've won
 // add user difficulty setting
-// align everything
 // add undo button
 // add function to refresh button
+// fix scss
+// separate css into distinct files and correct class names
+
+// DONE:
+// align everything
 
 
 function BuildGrid(props) {
