@@ -1,6 +1,6 @@
 import Node from "../node/node.jsx";
 import React from "react";
-import { generateNodeCoordinates } from "../grid-container/grid-container.helpers.jsx";
+import { generateNodeCoordinates } from "../grid/grid-container.helpers.jsx";
 
 // TODO:
 // make buttons look like they've been clicked

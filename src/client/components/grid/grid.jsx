@@ -4,7 +4,7 @@ import GridItem from "../buildGrid/buildGrid.jsx";
 import Line from "../line/line.jsx";
 import React from "react";
 
-function GridContainer(props) {
+function Grid(props) {
     const { rows, columns, nodes } = props;
     
     const rowLength = [...Array(rows).keys()];
@@ -106,4 +106,4 @@ function GridContainer(props) {
 
 }
 
-export default GridContainer;
+export default Grid;
