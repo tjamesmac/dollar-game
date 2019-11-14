@@ -1,7 +1,7 @@
 import React from "react";
 import { getNodeCoordinates } from "../grid/grid.helpers.jsx";
 
-function Line(props) {
+function buildLines(props) {
     const [coordinates, setCoordinates] = React.useState(null);
     const { bridges } = props;
     // this removes duplicates from 'bridges' to prevent copies of same lines
@@ -58,10 +58,10 @@ function Line(props) {
         })
     }
     return (
-        <React.Fragment>
+        <>
             {renderLines}
-        </React.Fragment>
+        </>
     )
 }
 
-export default Line;
+export default buildLines;

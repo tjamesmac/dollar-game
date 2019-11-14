@@ -1,7 +1,7 @@
 import "./grid.scss";
 import { bridgeBuilder, generateGrid, generateNodeCoordinates, generateRandomValues, getAmountofBridges, nodeBridges } from "./grid.helpers.jsx";
 import BuildGrid from "../buildGrid/buildGrid.jsx";
-import Line from "../line/line.jsx";
+import BuildLines from "../buildLines/buildLines.jsx";
 import React from "react";
 
 function Grid(props) {
@@ -33,7 +33,7 @@ function Grid(props) {
                     rows={rows}
                     nodes={amountOfNodes}
                 />
-                <Line bridges={attachBridges} />
+                <BuildLines bridges={attachBridges} />
             </div>
             <div className="button-container">
                 <button className="refresh">
