@@ -17,8 +17,8 @@ function Grid(props) {
     const amountOfBridges = getAmountofBridges(builtBridges);
     const attachBridges = nodeBridges(builtBridges);
     const randomNodeValues = generateRandomValues(nodes, amountOfBridges);
-    const grid = generateGrid(rows, columns); // returns array that represents grid
-    const nodeCordinates = generateNodeCoordinates(coordinateRequirements);
+    const builtGrid = generateGrid(rows, columns); // returns array that represents grid
+    const nodeCoordinates = generateNodeCoordinates(coordinateRequirements);
 
     return (
         <>
@@ -26,8 +26,8 @@ function Grid(props) {
                 <BuildGrid
                     nodeValues={randomNodeValues}
                     bridges={builtBridges}
-                    gridArr={grid}
-                    nodeCoor={nodeCordinates}
+                    grid={builtGrid}
+                    coordinates={nodeCoordinates}
                     connections={attachBridges}
                     columns={columns}
                     rows={rows}
