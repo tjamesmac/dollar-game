@@ -1,16 +1,7 @@
-export function generateGridArr(rows, columns) {
+export function generateGrid(rows, columns) {
     const numOfRows = [...Array(rows).keys()];
-    const grid = [];
-    for (const col of columns) {
-        // const rowArray = [];
-        // for (const item of numOfRows) {
-        //     const cell = {};
-        //     cell.index = item;
-        //     cell.active = false;
-        //     cell.bridges = null;
-        //     cell._id = null;
-        //     rowArray.push(cell);
-        // }
+    const numOfColumns = [...Array(columns).keys()];
+    const grid = numOfColumns.map(() => {
         const row = numOfRows.map((item) => {
             const cell = {};
             cell.index = item;
@@ -19,8 +10,8 @@ export function generateGridArr(rows, columns) {
             cell._id = null;
             return cell;
         })
-        grid.push(row);
-    }
+        return row;
+    })
     return grid;
 }
 
