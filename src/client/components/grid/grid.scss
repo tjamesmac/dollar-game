@@ -21,6 +21,11 @@ text-align: center;
   top: 0; // this is magic
 }
 
+.line{
+  stroke: rgb(129, 129, 129);
+  z-index: 1;
+}
+
 .text-container {
   display: flex;
   flex-direction: column;
