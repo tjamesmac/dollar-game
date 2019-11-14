@@ -18,6 +18,9 @@ export function generateGrid(rows, columns) {
     })
     return grid;
 }
+
+// takes all the built bridges
+// returns an int of all bridges
 export function getAmountofBridges(allBridges) {
     let amountOfBridges = 0;
     for (const bridges of allBridges) {
@@ -66,8 +69,6 @@ export function generateNodeCoordinates(requirements) {
     return validCoordinates;
 }
 
-
-
 export function getNodeCoordinates() {
     const coorObj = {};
     const nodes = document.querySelectorAll(".node");
@@ -101,36 +102,36 @@ export function generateRandomArray(nodeLength, numberOfBridges) { // generate r
     }
 }
 
-export function generateBridges(nodeLength) { // returns an array of bridges between 1 - nodeLength [1, 2, 3]
-    const maximumBridges = nodeLength - 1;
+export function generateBridges(numOfNodes) { // returns an array of bridges between 1 - nodeLength [1, 2, 3]
+    const maximumBridges = numOfNodes - 1;
     function getRandomIntMinMax(min, max) {
         min = Math.ceil(min);
         max = Math.floor(max);
         return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
     }
-    const randomBridgeLength = getRandomIntMinMax(1, maximumBridges);
-    const randomArray = (length, max) => [...new Array(length)]
+    const randomBridges = (length, max) => [...new Array(length)]
         .map(() => Math.floor(Math.random() * (max)));
-    const randomValues = randomArray(randomBridgeLength, nodeLength);
-    const filteredArray = [...new Set(randomValues)]
-    return filteredArray;
+    const numOfBridges = getRandomIntMinMax(1, maximumBridges);
+    const bridgeConnections = randomBridges(numOfBridges, numOfNodes);
+    const uniqueBridges = [...new Set(bridgeConnections)]
+    return uniqueBridges;
 }
 
 export function bridgeBuilder(nodeLength) {
-    function bridgeValidator(index, nodeNumber) {
-        let bridge = generateBridges(nodeNumber);
+    function bridgeValidator(index, numOfNodes) {
+        let bridge = generateBridges(numOfNodes);
         // prevents node from being connected to itself
         if (bridge.includes(index)) {
-            const newBridge = generateBridges(nodeNumber);
+            const newBridge = generateBridges(numOfNodes);
             bridge = newBridge;
-            return bridgeValidator(index, nodeNumber);
+            return bridgeValidator(index, numOfNodes);
         } else {
             bridgeArray.push(bridge);
         }
     }
     const bridgeArray = [];
-    for (const node of nodeLength) {
-        bridgeValidator(node, nodeLength.length);
+    for (const index of nodeLength) {
+        bridgeValidator(index, nodeLength.length);
     }
     return bridgeArray;
 }
