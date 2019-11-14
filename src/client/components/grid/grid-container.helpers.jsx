@@ -117,23 +117,23 @@ export function generateBridges(numOfNodes) { // returns an array of bridges bet
     return uniqueBridges;
 }
 
-export function bridgeBuilder(nodeLength) {
+export function bridgeBuilder(nodes) {
     function bridgeValidator(index, numOfNodes) {
-        let bridge = generateBridges(numOfNodes);
-        // prevents node from being connected to itself
-        if (bridge.includes(index)) {
-            const newBridge = generateBridges(numOfNodes);
-            bridge = newBridge;
+        let bridges = generateBridges(numOfNodes);
+        if (bridges.includes(index)) { // prevents node from being connected to itself
+            const newBridges = generateBridges(numOfNodes);
+            bridges = newBridges;
             return bridgeValidator(index, numOfNodes);
         } else {
-            bridgeArray.push(bridge);
+            return bridges;
         }
     }
-    const bridgeArray = [];
-    for (const index of nodeLength) {
-        bridgeValidator(index, nodeLength.length);
-    }
-    return bridgeArray;
+    // returns valid bridges for each node
+    const allBridges = nodes.map((index) => {
+        const bridges = bridgeValidator(index, nodes.length);
+        return bridges;
+    })
+    return allBridges;
 }
 
 export function nodeConnections(bridgeArray) {
