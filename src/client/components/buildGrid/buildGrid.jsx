@@ -14,56 +14,60 @@ import { generateNodeCoordinates } from "../grid/grid.helpers.jsx";
 // console.log the win number
 
 function BuildGrid(props) {
-    const { nodeValues, gridArr, nodeCoor, connections, nodes, rows, columns } = props;
-    const [gameWon, setGameWon] = React.useState(null);
-    const [generatedNodeValues, setNodeValues] = React.useState(nodeValues);
+    const { nodeValues, grid, coordinates, connections } = props;
+
+    const [isGameWon, setIsGameWon] = React.useState(null);
+    const [getNodeValues, setNodeValues] = React.useState(nodeValues);
     const [turnCount, setTurnCount] = React.useState(0);
 
-    function nodeClick(nodeID) {
+    function handleClick(id) {
         setTurnCount(turnCount + 1);
-        const oldValues = generatedNodeValues;
-        const id = nodeID;
+        const currentValues = getNodeValues;
         const allConnections = connections[id];
-        let value = generatedNodeValues[id]
-        oldValues[id] = value - allConnections.length;
+
+        let nodeValue = getNodeValues[id]
+        currentValues[id] = nodeValue - allConnections.length;
+
         for (const connection of allConnections) {
-            oldValues[connection] = oldValues[connection] + 1;
+            currentValues[connection] = currentValues[connection] + 1;
         }
-        const newValues = oldValues;
-        setNodeValues(newValues => [...newValues]) // this works right now
-        const newFilter = newValues.filter(x => x >= 0);
+        setNodeValues(oldValues => [...oldValues]) // this works right now
+        const positive = 0;
+        const newFilter = currentValues.filter(value => value >= positive);
         if (newFilter.length === nodeValues.length){
-            console.log("I win");
-            setGameWon(true);
+            setIsGameWon(true);
         }
     }
-    let makeGrid;
-    if (generatedNodeValues) {
 
+    let buildGrid;
+    if (getNodeValues) {
         let count = 0;
-        for (const node of nodeCoor) {
-            for (const [index, item] of gridArr.entries()) {
-                if (node[0] === index) {
-                    for (const iter of item) {
-                        if (node[1] === iter.index) {
-                            iter.active = true
-                            iter._id = count;
+        for (const node of coordinates) {
+            for (const [index, row] of grid.entries()) {
+                const xPos = node[0] // x coordinate
+                if (xPos === index) {
+                    for (const cell of row) {
+                        const yPos = node[1];
+                        if (yPos === cell.index) {
+                            cell.active = true
+                            cell._id = count;
                             count += 1;
                         }
                     }
                 }
             }
         }
-        makeGrid = gridArr.map((item, index) => {
-            const makeRows = item.map((row, rowIndex) => {
+        buildGrid = grid.map((item, index) => {
+            const buildRows = item.map((row, rowIndex) => {
                 if (row.active) {
+                    const nodeID = row._id;
                     return (
                         <div
-                            onClick={() => nodeClick(row._id, generatedNodeValues[row._id])}
+                            onClick={() => handleClick(nodeID, getNodeValues[nodeID])}
                             className="row"
-                            key={row._id + "row"}
+                            key={nodeID + "row"}
                         >
-                            <Node id={row._id} value={generatedNodeValues[row._id]}  />
+                            <Node id={nodeID} value={getNodeValues[nodeID]} />
                         </div>
                     )
                 } else {
@@ -73,12 +77,11 @@ function BuildGrid(props) {
                 }
             })
             return (
-                <div className="col" key={index}>{makeRows}</div>
+                <div className="col" key={index}>{buildRows}</div>
             )
         })
     }
-    let gameWonAlert;
-    if (gameWon) {
+    if (isGameWon) {
         alert("You won!")
         //  location.reload();
         // console.log(nodes, rows, columns);
@@ -86,11 +89,10 @@ function BuildGrid(props) {
         // setNodeValues(newCoordinates);
     }
     return (
-        <React.Fragment>
-            {gameWonAlert}
+        <>
             <div>Turn count: {turnCount}</div>
-            {makeGrid}
-        </React.Fragment>
+            {buildGrid}
+        </>
     )
 }
 
