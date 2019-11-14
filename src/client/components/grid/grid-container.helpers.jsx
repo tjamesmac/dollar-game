@@ -78,8 +78,8 @@ export function getNodeCoordinates() {
     }
     return coorObj;
 }
-
-export function generateRandomArray(nodeLength, numberOfBridges) { // generate random numbers between two values and should be node length
+// generate random numbers between two values and should be node length
+export function generateRandomArray(nodeLength, numberOfBridges) {
     const bridgeLength = numberOfBridges;
     const randomArray = (length, min, max) => [...new Array(length)].map(() => Math.floor(Math.random() * (max - min)) + min);
     const randomValues = randomArray(nodeLength, -9, 9);
@@ -102,7 +102,8 @@ export function generateRandomArray(nodeLength, numberOfBridges) { // generate r
     }
 }
 
-export function generateBridges(numOfNodes) { // returns an array of bridges between 1 - nodeLength [1, 2, 3]
+// returns an array of numbers between 1 - array.length
+export function generateBridges(numOfNodes) {
     const maximumBridges = numOfNodes - 1;
     function getRandomIntMinMax(min, max) {
         min = Math.ceil(min);
@@ -118,6 +119,7 @@ export function generateBridges(numOfNodes) { // returns an array of bridges bet
 }
 
 export function bridgeBuilder(nodes) {
+    // validates the array of numbers doesn't include own index
     function bridgeValidator(index, numOfNodes) {
         let bridges = generateBridges(numOfNodes);
         if (bridges.includes(index)) { // prevents node from being connected to itself
@@ -136,28 +138,28 @@ export function bridgeBuilder(nodes) {
     return allBridges;
 }
 
-export function nodeConnections(bridgeArray) {
-    const connectionObject = {};
-    for (const [index, bridge] of bridgeArray.entries()) {
-        if (!connectionObject[index]) { // if property doesn't exist
-            connectionObject[index] = []; // make it
+// returns object that contains all possible bridges
+// for each node
+export function nodeBridges(allBridges) {
+    const allConnections = {};
+    for (const [index, bridges] of allBridges.entries()) {
+        if (!allConnections[index]) { // if property doesn't exist
+            allConnections[index] = []; // make it
         }
-        let connectionArray = connectionObject[index] // if it does exist
-        for (const item of bridge) {
-            connectionArray.push(item);
-            if (connectionObject[item]) {
-                connectionObject[item].push(index)
+        let connection = allConnections[index] // if it does exist
+        for (const item of bridges) {
+            connection.push(item); // add bridge to connection
+            if (allConnections[item]) {
+                allConnections[item].push(index) // add to corresponding node
             } else {
                 // create property to store bridge connection
-                connectionObject[item] = [];
-                connectionObject[item].push(index)
+                allConnections[item] = [];
+                allConnections[item].push(index)
             }
         }
-        
     }
-    Object.entries(connectionObject).forEach(([key, val]) => {
-        connectionObject[key] = [...new Set(val)];
+    Object.entries(allConnections).forEach(([index, bridges]) => {
+        allConnections[index] = [...new Set(bridges)];
     })
-    console.log(connectionObject);
-    return connectionObject;
+    return allConnections;
 }
