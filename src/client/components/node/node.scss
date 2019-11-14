@@ -3,6 +3,7 @@
 // baseUnit
 $base-unit: 50px;
 
+// add media queries to adjust width and height of nodes at different screen sizes
 
 .node {
   // positioning
@@ -73,7 +74,7 @@ $base-unit: 50px;
 .refresh{
   border-radius: 50%;
   // margin-left: 200px;
-  flex: 1 1 50%;
+  flex: 1 1 45%;
   display: flex;
   align-items: center;
   justify-content: center;
