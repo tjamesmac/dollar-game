@@ -29,16 +29,13 @@ function Grid(props) {
                     grid={builtGrid}
                     coordinates={nodeCoordinates}
                     connections={attachBridges}
-                    columns={columns}
-                    rows={rows}
-                    nodes={amountOfNodes}
+                    // columns={columns}
+                    // rows={rows}
+                    // nodes={amountOfNodes}
                 />
-                {/* <div className="line-container"> */}
-                {/* <svg className="svg-line" height="100%" width="100%" viewBox="0 0 480 480"> */}
                 <svg className="svg-line" height="100%" width="100%">
                     <BuildLines bridges={attachBridges} />
                 </svg>
-                {/* </div> */}
             </div>
             <div className="button-container">
                 <button className="refresh">
