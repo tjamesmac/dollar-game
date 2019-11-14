@@ -6,33 +6,27 @@ import React from "react";
 
 function Grid(props) {
     const { rows, columns, nodes } = props;
-    
     const amountOfNodes = [...Array(nodes).keys()];
-
-    const builtBridges = bridgeBuilder(amountOfNodes);
-    const amountOfBridges = getAmountofBridges(builtBridges);
-    const attachBridges = nodeBridges(builtBridges);
-    const randomValues = generateRandomValues(nodes, amountOfBridges);
-    const gridArray = generateGrid(rows, columns); // returns array that represents grid
-
-    
     const coordinateRequirements = {
         amountOfNodes,
         columns,
         rows,
     }
+
+    const builtBridges = bridgeBuilder(amountOfNodes);
+    const amountOfBridges = getAmountofBridges(builtBridges);
+    const attachBridges = nodeBridges(builtBridges);
+    const randomNodeValues = generateRandomValues(nodes, amountOfBridges);
+    const grid = generateGrid(rows, columns); // returns array that represents grid
     const nodeCordinates = generateNodeCoordinates(coordinateRequirements);
 
     return (
         <>
-         
-
             <div className="grid-container">
-                
                 <GridItem
-                    nodeValues={randomValues}
+                    nodeValues={randomNodeValues}
                     bridges={builtBridges}
-                    gridArr={gridArray}
+                    gridArr={grid}
                     nodeCoor={nodeCordinates}
                     connections={attachBridges}
                     columns={columns}
