@@ -7,7 +7,7 @@ function App() {
     const nodes = 5
     return (
         <>
-            {/* <h1 className="bold-text">The Dollar Game!</h1> */}
+            <span className="bold-text">The Dollar Game!</span>
             <Grid columns={columns} rows={rows} nodes={nodes} />
         </>
     )
