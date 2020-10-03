@@ -1,5 +1,7 @@
 # dollar-game
 
+Hosted here: https://dollar-game.herokuapp.com/
+
 ## Project setup
 ```
 npm install
